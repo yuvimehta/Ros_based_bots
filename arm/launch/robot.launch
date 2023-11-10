@@ -1,0 +1,28 @@
+<launch>
+  <rosparam file="$(find arm)/config/controller_arm.yaml" command="load"/>
+  <!--<node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" ns="Flipkart" args="Revolute_1_position_controller Revolute_2_position_controller Revolute_3_position_controller Revolute_4_position_controller joint_state_controller "/>-->
+  <node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" ns="Flipkart_Grid_Arm_controller" args="joint_state_controller joint_position_controller"/>
+  <!--<node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" ns="Flipkart_Grid_Arm" args="joint_state_controller joint_position_controller"/>
+-->
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="false" output="screen">
+    <remap from="/joint_states" to="/Flipkart/joint_states"/>
+  </node>
+  <!--
+  
+<rosparam file="$(find Flipkart_Grid_Arm_description)/launch/controller.yaml" command="load"/>
+<node name="controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" ns="Flipkart_Grid_Arm" args="BJ_position_controller SJ_position_controller EJ_position_controller W1J_position_controller W2J_position_controller joint_state_controller "/>
+<node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="false" output="screen">
+  <remap from="/joint_states" to="/Flipkart_Grid_Arm/joint_states"/>
+</node>
+
+-->
+  <param name="robot_description" command="$(find xacro)/xacro $(find arm)/urdf/Flipkart_Grid_Arm.xacro"/>
+  <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-param robot_description -urdf -model Flipkart_Grid_Arm"/>
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <arg name="paused" value="true"/>
+    <arg name="use_sim_time" value="true"/>
+    <arg name="gui" value="true"/>
+    <arg name="headless" value="false"/>
+    <arg name="debug" value="false"/>
+  </include>
+</launch>
