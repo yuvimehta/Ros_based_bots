@@ -1,0 +1,204 @@
+<?xml version="1.0" ?>
+<robot name="major_snakebot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+
+<xacro:include filename="$(find major_snakebot_description)/urdf/materials.xacro" />
+<xacro:include filename="$(find major_snakebot_description)/urdf/major_snakebot.trans" />
+<xacro:include filename="$(find major_snakebot_description)/urdf/major_snakebot.gazebo" />
+<link name="base_link">
+  <inertial>
+    <origin xyz="-1.0063426567998859e-14 0.0016920743650211212 5.498025416273251e-05" rpy="0 0 0"/>
+    <mass value="0.28034499278694097"/>
+    <inertia ixx="5.2e-05" iyy="8.9e-05" izz="5.3e-05" ixy="-0.0" iyz="0.0" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://major_snakebot_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://major_snakebot_description/meshes/base_link.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="link1_1">
+  <inertial>
+    <origin xyz="-0.00028205388177530055 0.019536414443669894 -2.684846921085119e-07" rpy="0 0 0"/>
+    <mass value="0.38257083390368296"/>
+    <inertia ixx="0.000106" iyy="8.8e-05" izz="0.000108" ixy="2e-06" iyz="0.0" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.0 -0.01 -0.0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://major_snakebot_description/meshes/link1_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.0 -0.01 -0.0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://major_snakebot_description/meshes/link1_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="camera_1">
+  <inertial>
+    <origin xyz="5.228390152620037e-13 -0.0020000000000000035 0.0" rpy="0 0 0"/>
+    <mass value="0.0024661502330680938"/>
+    <inertia ixx="0.0" iyy="0.0" izz="0.0" ixy="-0.0" iyz="-0.0" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.0 0.008 -0.01" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://major_snakebot_description/meshes/camera_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.0 0.008 -0.01" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://major_snakebot_description/meshes/camera_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="lidar_1">
+  <inertial>
+    <origin xyz="-1.5706442871424766e-18 -0.0020000000000000018 0.0" rpy="0 0 0"/>
+    <mass value="0.005548838024402975"/>
+    <inertia ixx="0.0" iyy="0.0" izz="0.0" ixy="-0.0" iyz="-0.0" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.0 0.008 0.01" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://major_snakebot_description/meshes/lidar_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.0 0.008 0.01" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://major_snakebot_description/meshes/lidar_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="organ_1">
+  <inertial>
+    <origin xyz="-0.0094703113301693 0.03638400045598387 -7.649285923273954e-05" rpy="0 0 0"/>
+    <mass value="0.478106946885108"/>
+    <inertia ixx="0.000194" iyy="9.8e-05" izz="0.000194" ixy="3e-06" iyz="1e-06" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.008763 -0.0545 0.0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://major_snakebot_description/meshes/organ_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.008763 -0.0545 0.0" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://major_snakebot_description/meshes/organ_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="organ_2">
+  <inertial>
+    <origin xyz="-0.009470138123030918 0.03638400045598389 -0.00011934070620622556" rpy="0 0 0"/>
+    <mass value="0.478106946885108"/>
+    <inertia ixx="0.000194" iyy="9.8e-05" izz="0.000194" ixy="3e-06" iyz="1e-06" ixz="-0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.008927 -0.12195 0.000414" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://major_snakebot_description/meshes/organ_2.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.008927 -0.12195 0.000414" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://major_snakebot_description/meshes/organ_2.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<link name="tail_1">
+  <inertial>
+    <origin xyz="-0.009434348124270846 -0.046036136514666676 0.0004142043060530326" rpy="0 0 0"/>
+    <mass value="0.19624058941494574"/>
+    <inertia ixx="4.3e-05" iyy="2.7e-05" izz="4.1e-05" ixy="1e-06" iyz="0.0" ixz="0.0"/>
+  </inertial>
+  <visual>
+    <origin xyz="-0.009255 -0.25685 0.001328" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://major_snakebot_description/meshes/tail_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+    <material name="silver"/>
+  </visual>
+  <collision>
+    <origin xyz="-0.009255 -0.25685 0.001328" rpy="0 0 0"/>
+    <geometry>
+      <mesh filename="package://major_snakebot_description/meshes/tail_1.stl" scale="0.001 0.001 0.001"/>
+    </geometry>
+  </collision>
+</link>
+
+<joint name="head_joint" type="continuous">
+  <origin xyz="0.0 0.01 0.0" rpy="0 0 0"/>
+  <parent link="base_link"/>
+  <child link="link1_1"/>
+  <axis xyz="0.0 1.0 0.0"/>
+</joint>
+
+<joint name="camera_joint" type="fixed">
+  <origin xyz="0.0 -0.008 0.01" rpy="0 0 -1.57"/>
+  <parent link="base_link"/>
+  <child link="camera_1"/>
+</joint>
+
+<joint name="lidar_joint" type="fixed">
+  <origin xyz="0.0 -0.008 -0.01" rpy="0 0 -1.57"/>
+  <parent link="base_link"/>
+  <child link="lidar_1"/>
+</joint>
+
+<joint name="joint1" type="continuous">
+  <origin xyz="0.008763 0.0445 -0.0" rpy="0 0 0"/>
+  <parent link="link1_1"/>
+  <child link="organ_1"/>
+  <axis xyz="-1.0 0.0 0.0"/>
+</joint>
+
+<joint name="joint2" type="continuous">
+  <origin xyz="0.000164 0.06745 -0.000414" rpy="0 0 0"/>
+  <parent link="organ_1"/>
+  <child link="organ_2"/>
+  <axis xyz="-1.0 0.0 0.0"/>
+</joint>
+
+<joint name="joint3" type="fixed">
+  <origin xyz="0.000328 0.1349 -0.000914" rpy="0 0 0"/>
+  <parent link="organ_2"/>
+  <child link="tail_1"/>
+  <axis xyz="1.0 0.0 0.0"/>
+</joint>
+
+<link name="camera_link_optical">
+</link>
+
+<joint name="camera_optical_joint" type="fixed">
+        <parent link="camera_1"/>
+        <child link="camera_link_optical"/>
+        <origin xyz="0 0 0" rpy="${-pi/2} 0 ${-pi/2}"/>
+</joint>
+ 
+
+</robot>
