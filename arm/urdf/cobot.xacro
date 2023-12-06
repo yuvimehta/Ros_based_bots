@@ -1,9 +1,9 @@
 <?xml version="1.0" ?>
-<robot name="Flipkart_Grid_Arm" xmlns:xacro="http://www.ros.org/wiki/xacro">
+<robot name="Cobot" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
 <xacro:include filename="$(find arm)/urdf/materials.xacro" />
-<xacro:include filename="$(find arm)/urdf/Flipkart_Grid_Arm.trans" />
-<xacro:include filename="$(find arm)/urdf/Flipkart_Grid_Arm.gazebo" />
+<xacro:include filename="$(find arm)/urdf/cobot.trans" />
+<xacro:include filename="$(find arm)/urdf/cobot.gazebo" />
 <link name= "world"/>
 <link name="base_link">
   <inertial>
