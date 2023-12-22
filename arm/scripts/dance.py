@@ -61,7 +61,7 @@ if __name__ == '__main__':
  
     # Move the joints of the robot arm to the desired angles in radians
 
-    if ans == "yeah":
+    if ans == "yes":
 
       for i in range(2):
         for  i in range(4):

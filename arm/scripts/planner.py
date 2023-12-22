@@ -1,29 +1,68 @@
 #!/usr/bin/env python3
+from __future__ import print_function # Printing
+import rospy # Python client library
+import actionlib # ROS action library
+from control_msgs.msg import FollowJointTrajectoryAction, FollowJointTrajectoryGoal # Controller messages
+from std_msgs.msg import Float64 # 64-bit floating point numbers
+from trajectory_msgs.msg import JointTrajectoryPoint # Robot trajectories
 import sys
+import time
 from PyQt5.QtWidgets import QApplication, QMainWindow, QSlider, QVBoxLayout, QWidget, QLabel, QPushButton, QLineEdit
 from PyQt5.QtCore import Qt
 import threading
-import rospy
 from std_msgs.msg import String
-rospy.init_node('basic_publisher', anonymous=True)
-pub = rospy.Publisher('topic_name', String, queue_size=10)
+
+
+
+
+rospy.init_node('send_goal_to_arm', anonymous=True)
+pub = rospy.Publisher('joint_angles', String, queue_size=10)
 rate = rospy.Rate(1)  
 
 
+def move_robot_arm(joint_values):
+ 
+  
+  arm_client = actionlib.SimpleActionClient('arm_controller/follow_joint_trajectory', FollowJointTrajectoryAction)
+ 
+  # Wait for the server to start up and start listening for goals.
+  arm_client.wait_for_server()
+     
+  # Create a new goal to send to the Action Server
+  arm_goal = FollowJointTrajectoryGoal()
+ 
+  # Store the names of each joint of the robot arm
+  arm_goal.trajectory.joint_names = ['BJ', 'SJ','EJ' ,'W1J', 'W2J']
+   
+  # Create a trajectory point   
+  point = JointTrajectoryPoint()
+ 
+  # Store the desired joint values
+  point.positions = joint_values
+ 
+  # Set the time it should in seconds take to move the arm to the desired joint angles
+  point.time_from_start = rospy.Duration(0.5)
+ 
+  # Add the desired joint values to the goal
+  arm_goal.trajectory.points.append(point)
+ 
+  # Define timeout values
+  exec_timeout = rospy.Duration(10)
+  prmpt_timeout = rospy.Duration(5)
+ 
+  # Send a goal to the ActionServer and wait for the server to finish performing the action
+  arm_client.send_goal_and_wait(arm_goal, exec_timeout, prmpt_timeout)
+ 
+
+
 def ros(values):
-    
     print(values)
-    while True:
-        message = String()
-        message.data = values
+    move_robot_arm(values)
 
-        
-        pub.publish(message)
+def home():
+    val = [0.00,0.00,-1.57,-1.57,1.57]
 
-        rospy.loginfo("Published: %s", message.data)
-        rate.sleep()
-
-move = threading.Thread(target=ros, args=(1,), daemon=True)
+    move_robot_arm(val)
 
 
 class SliderDemo(QMainWindow):
@@ -70,6 +109,9 @@ class SliderDemo(QMainWindow):
         self.print_button = QPushButton('Move to Goal')
         self.layout.addWidget(self.print_button)
         self.print_button.clicked.connect(self.print_values)
+        self.home_button = QPushButton('Home Position')
+        self.layout.addWidget(self.home_button)
+        self.print_button.clicked.connect(self.home)
 
     def update_value_label(self):
         for i, slider in enumerate(self.sliders):
@@ -77,11 +119,11 @@ class SliderDemo(QMainWindow):
             self.value_labels[i].setText(f'Current Value: {value:.2f}')
 
     def print_values(self):
-        
         values = [slider.value() / 100.0 for slider in self.sliders]  # Divide by 100 to get the actual value
-        print("Slider Names:", self.slider_names)
         result = ros(values)
-        move.start()
+
+    def home(self):
+       result1 = home()
     
     
 def main():
